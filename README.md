@@ -18,8 +18,8 @@
 Python 类库（模块）极其丰富，这使得 Python 几乎无所不能，不管是传统的 Web 开发、PC 软件开发、Linux 运维，还是当下火热的机器学习、大数据分析、网络爬虫，Python 都能胜任。如果有 **小朋友** [@Ba1oretto](https://github.com/Ba1oretto) 出于兴趣学习 Python，请引导他阅读本教程的前半部分，这是基础，可以降低学习成本~
 ## 模块
 
-| Python [基础内容](https://github.com/Caishangqi/python-basic) |
-|-----------------------------------------------------------|
+| Python [基础内容](https://github.com/Caishangqi/python-basic)                                    |
+|----------------------------------------------------------------------------------------------|
 | **Python** [**数据结构**](https://github.com/Caishangqi/python-basic/tree/python-data-structure) |
 
 ## 说明
