@@ -23,7 +23,7 @@ def findWithSum(arr, value, n=2):
 
         if val == value:
             for tup in subsequences:
-                res.__setitem__(tup[0], tup[1])
+                res[tup[0]] = tup[1]
 
     return res
 

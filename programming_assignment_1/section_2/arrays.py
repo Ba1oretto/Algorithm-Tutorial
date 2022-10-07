@@ -1,4 +1,4 @@
-from utils import StaticArray
+from programming_assignment_1.assignment_syllabus.utils import StaticArray
 
 
 def append_value(arr, value):
@@ -132,3 +132,7 @@ class DynamicArray(StaticArray):
             self.reallocate(self.size // 2)
         elif self.__len__() / self.size > 0.8:
             self.reallocate(self.size * 2)
+
+
+if __name__ == '__main__':
+    pass
