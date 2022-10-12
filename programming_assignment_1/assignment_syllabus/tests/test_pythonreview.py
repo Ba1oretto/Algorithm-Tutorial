@@ -3,7 +3,7 @@ from gradescope_utils.autograder_utils.decorators import weight
 from pythonreview import *
 
 class TestPythonReview(unittest.TestCase):
-    @weight(1)
+    @weight(0.5)
     def test_case1(self):
         """01 Python Review: Empty array should always return an empty dict"""
         arr = []
@@ -12,7 +12,7 @@ class TestPythonReview(unittest.TestCase):
             self.assertIsInstance(output, dict)
             self.assertEqual(output, {})
 
-    @weight(1)
+    @weight(0.5)
     def test_case2(self):
         """01 Python Review: n = 0 should always return an empty dict"""
         n = 0
@@ -22,7 +22,7 @@ class TestPythonReview(unittest.TestCase):
             self.assertIsInstance(output, dict)
             self.assertEqual(output, {})
 
-    @weight(1)
+    @weight(0.5)
     def test_case3(self):
         """01 Python Review: Test with invalid inputs"""
 
@@ -47,7 +47,7 @@ class TestPythonReview(unittest.TestCase):
         self.assertIsInstance(output, dict)
         self.assertEqual(output,{})
 
-    @weight(1)
+    @weight(0.5)
     def test_case4(self):
         """01 Python Review: Check whether sum is correct"""
         arr = [1,2,3]
@@ -57,7 +57,7 @@ class TestPythonReview(unittest.TestCase):
         self.assertIsInstance(output, dict)
         self.assertEqual(sum(output.values()),value)
 
-    @weight(1)
+    @weight(0.5)
     def test_case5(self):
         """01 Python Review: Check whether indexing is correct"""
         arr = [1,2,3]
@@ -68,7 +68,7 @@ class TestPythonReview(unittest.TestCase):
         for k,v in output.items():
             self.assertEqual(arr[k],v)
 
-    @weight(1)
+    @weight(0.5)
     def test_case6(self):
         """01 Python Review: Two more test cases"""
         arr = [10,10,20]

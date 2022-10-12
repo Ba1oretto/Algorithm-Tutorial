@@ -27,5 +27,6 @@ if __name__ == '__main__':
             print(bcolors.FAIL+'-'*10)
         for k,v in test.items():
             print(f"{k}: {v}")
-    print(bcolors.HEADER + bcolors.BOLD + f"Your final score: {data['score']}/90")
+    print(bcolors.HEADER + bcolors.BOLD + f"Your final score: {data['score']}/18")
+    print(bcolors.ENDC)
 

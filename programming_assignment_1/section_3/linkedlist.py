@@ -1,4 +1,5 @@
-from utils import Node, Collections, StaticArray
+from programming_assignment_1.assignment_syllabus.utils import Node, Collections, StaticArray
+
 
 class LinkedList(Collections):
     def __init__(self, isSet=False, isDoubly=False, isCircular=False):
@@ -185,3 +186,16 @@ class LinkedList(Collections):
             current = current.next
             if self.should_break(current):
                 break
+
+
+if __name__ == '__main__':
+    ll = LinkedList(isSet=False, isDoubly=True, isCircular=True)
+    ll.append(1)
+    ll.append(2)
+    ll.append(3)
+    ll.append(1)
+
+    for l in ll:
+        print(l)
+
+    print(ll)

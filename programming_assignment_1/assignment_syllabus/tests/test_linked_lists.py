@@ -4,17 +4,18 @@ from linkedlist import LinkedList
 from utils import *
 
 class TestLinkedList(unittest.TestCase):
-    @weight(1)
+    @weight(0.25)
     def test1(self):
         """03 Linked List: Checking length and size of LinkedList."""
-        arr = LinkedList(i)
+        arr = LinkedList()
+        arr[0] = '0'
         for i in range(1,10):
             arr[i] = i
             self.assertEqual(type(arr[i]), Node)
-            self.assertEqual(len(arr),i)
-            self.assertEqual(arr.get_size(),i)
+            self.assertEqual(len(arr),i+1)
+            self.assertEqual(arr.get_size(),i+1)
             
-    @weight(1)
+    @weight(0.25)
     def test2(self):
         """03 Linked List: Shifting property when adding new values."""
         arr = LinkedList()
@@ -35,7 +36,7 @@ class TestLinkedList(unittest.TestCase):
             self.assertEqual(type(arr[i]), Node)
             self.assertEqual(arr[i].data, v)
 
-    @weight(1)
+    @weight(0.25)
     def test3(self):
         """03 Linked List: Shifting property when removing values."""
         arr = LinkedList()
@@ -54,7 +55,7 @@ class TestLinkedList(unittest.TestCase):
             self.assertEqual(type(arr[1]), Node)
             self.assertEqual(arr[1].data,2-i)
 
-    @weight(1)
+    @weight(0.25)
     def test4(self):
         """03 Linked List: Doubly property."""
         arr = LinkedList(isDoubly=True)
@@ -64,7 +65,7 @@ class TestLinkedList(unittest.TestCase):
         for i in range(9):
             self.assertEqual(arr[i+1].prev, arr[i])
 
-    @weight(1)
+    @weight(0.5)
     def test5(self):
         """03 Linked List: Basic traversing."""
         arr = LinkedList()
@@ -74,7 +75,7 @@ class TestLinkedList(unittest.TestCase):
         for i in range(9):
             self.assertEqual(arr[i].next, arr[i+1])
 
-    @weight(1)
+    @weight(0.5)
     def test6(self):
         """03 Linked List: Extend with static array."""
         arr = LinkedList()
@@ -87,7 +88,7 @@ class TestLinkedList(unittest.TestCase):
             self.assertEqual(type(arr[i]),Node)
             self.assertEqual(arr[i].data,v)
 
-    @weight(1)
+    @weight(0.5)
     def test7(self):
         """03 Linked List: Iterable check"""
         arr = LinkedList()
@@ -98,7 +99,7 @@ class TestLinkedList(unittest.TestCase):
             self.assertEqual(n.data,i)
 
 
-    @weight(1)
+    @weight(0.5)
     def test8(self):
         """03 Linked List: Removing values and checking argwhere."""
         arr = LinkedList()
@@ -115,7 +116,7 @@ class TestLinkedList(unittest.TestCase):
             ans.append(i)
             self.assertEqual(arr.argwhere(i),ans)
 
-    @weight(1)
+    @weight(0.5)
     def test9(self):
         """03 Linked List: Checking whether equals is working."""
         arr1 = LinkedList()
@@ -140,7 +141,7 @@ class TestLinkedList(unittest.TestCase):
         del arr2[0]
         self.assertNotEqual(arr1,arr2)
 
-    @weight(1)
+    @weight(0.5)
     def test10(self):
         """03 Linked List: Checking circular property."""
         arr = LinkedList(isCircular=True)
@@ -148,7 +149,7 @@ class TestLinkedList(unittest.TestCase):
             arr.append(i)
         j = 0
         for n in arr:
-            self.assertEqual(n.data, j)
+            self.assertEqual(n.data, (j+10)%10)
             j+=1
             if j==20:
                 break

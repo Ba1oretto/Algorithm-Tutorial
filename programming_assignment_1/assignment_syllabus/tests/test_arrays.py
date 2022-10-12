@@ -4,7 +4,7 @@ from arrays import DynamicArray
 from utils import *
 
 class TestDynamicArray(unittest.TestCase):
-    @weight(1)
+    @weight(0.25)
     def test1(self):
         """02 Dynamic Array: Checking length and size of empty DynamicArray."""
         for i in range(1,10):
@@ -12,7 +12,7 @@ class TestDynamicArray(unittest.TestCase):
             self.assertEqual(len(arr),0)
             self.assertEqual(arr.get_size(),i)
             
-    @weight(1)
+    @weight(0.25)
     def test2(self):
         """02 Dynamic Array: Shifting property when adding new values."""
         arr = DynamicArray(10)
@@ -24,7 +24,7 @@ class TestDynamicArray(unittest.TestCase):
             self.assertEqual(arr[i],4-i)
             self.assertEqual(arr.get_size(),10)
 
-    @weight(1)
+    @weight(0.25)
     def test3(self):
         """02 Dynamic Array: Shifting property when removing values."""
         arr = DynamicArray(10)
@@ -49,7 +49,7 @@ class TestDynamicArray(unittest.TestCase):
             self.assertEqual(len(arr),6-i)
             self.assertEqual(arr.get_size(),10)
 
-    @weight(1)
+    @weight(0.25)
     def test4(self):
         """02 Dynamic Array: Resizing property when adding new values."""
         arr = DynamicArray(10)
@@ -61,7 +61,7 @@ class TestDynamicArray(unittest.TestCase):
             else:
                 self.assertEqual(arr.get_size(),20)
 
-    @weight(1)
+    @weight(0.5)
     def test5(self):
         """02 Dynamic Array: Resizing property when appending new values."""
         arr = DynamicArray(10)
@@ -73,7 +73,7 @@ class TestDynamicArray(unittest.TestCase):
             else:
                 self.assertEqual(arr.get_size(),20)
 
-    @weight(1)
+    @weight(0.5)
     def test6(self):
         """02 Dynamic Array: Resizing property when extending another array. Also checks extend is working properly."""
         arr = DynamicArray(10)
@@ -88,7 +88,7 @@ class TestDynamicArray(unittest.TestCase):
         self.assertEqual(len(arr),11)
         self.assertEqual(arr.get_size(),20)
 
-    @weight(1)
+    @weight(0.5)
     def test7(self):
         """02 Dynamic Array: Resizing property when deleting value"""
         arr = DynamicArray(10)
@@ -103,7 +103,7 @@ class TestDynamicArray(unittest.TestCase):
             else:
                 self.assertEqual(2, arr.get_size())
 
-    @weight(1)
+    @weight(0.5)
     def test8(self):
         """02 Dynamic Array: Resizing property when removing value"""
         arr = DynamicArray(10)
@@ -119,7 +119,7 @@ class TestDynamicArray(unittest.TestCase):
                 self.assertEqual(2, arr.get_size())
 
 
-    @weight(1)
+    @weight(0.5)
     def test9(self):
         """02 Dynamic Array: Removing values and checking argwhere."""
         arr = DynamicArray(10)
@@ -136,7 +136,7 @@ class TestDynamicArray(unittest.TestCase):
             ans.append(i)
             self.assertEqual(arr.argwhere(i),ans)
 
-    @weight(1)
+    @weight(0.5)
     def test10(self):
         """02 Dynamic Array: Checking whether equals is working."""
         arr1 = DynamicArray(10)
