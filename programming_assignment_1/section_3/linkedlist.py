@@ -189,13 +189,4 @@ class LinkedList(Collections):
 
 
 if __name__ == '__main__':
-    ll = LinkedList(isSet=False, isDoubly=True, isCircular=True)
-    ll.append(1)
-    ll.append(2)
-    ll.append(3)
-    ll.append(1)
-
-    for l in ll:
-        print(l)
-
-    print(ll)
+    pass

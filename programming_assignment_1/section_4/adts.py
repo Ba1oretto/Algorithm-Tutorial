@@ -1,8 +1,8 @@
-from utils import *
-from arrays import *
-from linkedlist import *
+from programming_assignment_1.section_2.arrays import DynamicArray
+from programming_assignment_1.section_3.linkedlist import LinkedList
 
-class StackOrQueue():
+
+class StackOrQueue:
     def __init__(self, useLinkedList=False, isQueue=False):
         self.data = LinkedList() if useLinkedList else DynamicArray(5)
         self.useLinkedList = useLinkedList
@@ -22,3 +22,10 @@ class StackOrQueue():
 
     def __repr__(self):
         return self.data.__repr__()
+
+
+if __name__ == '__main__':
+    adt = StackOrQueue(useLinkedList=True, isQueue=True)
+    adt.push('A')
+    adt.push('B')
+    print(adt.peek().data)

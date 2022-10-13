@@ -1,46 +1,27 @@
 from utils import StaticArray
 
 
-def append_value(arr, value):
-    index = 0
-    for e in arr:
-        if e is None:
-            arr[index] = value
-            break
-        index += 1
-
-
 class DynamicArray(StaticArray):
     def __init__(self, size, isSet=False):
         super(DynamicArray, self).__init__(size)
         self.isSet = isSet
+        self.isResizing = False
 
     def __getitem__(self, index):
         return self.data[index]
 
     def __setitem__(self, index, value):
-        # check whether value is present
+        # set: check whether value is present
         if self.isSet and self.argwhere(value).__len__() != 0:
             return
-
-        # case: append
-        if self[index] is None:
-            pointer = 0
-            for e in self:
-                if e is None:
-                    super().__setitem__(pointer, value)
-                    break
-                pointer += 1
-            return
-        # case: shift
+        if index >= self.__len__():
+            super().__setitem__(self.__len__(), value)
         else:
-            current_index = self.__len__()
-            while True:
-                if current_index == 0:
-                    super().__setitem__(index, value)
-                    break
-                super().__setitem__(current_index, self[current_index - 1])
-                current_index -= 1
+            i = self.__len__()
+            while i > index:
+                super().__setitem__(i, self[i - 1])
+                i -= 1
+            super().__setitem__(index, value)
 
         # resize array
         self.resize_array()
@@ -58,14 +39,7 @@ class DynamicArray(StaticArray):
         self.resize_array(True)
 
     def append(self, value):
-        index = 0
-        for element in self:
-            if element is None:
-                self[index] = value
-                break
-            index += 1
-
-        self.resize_array()
+        self[self.__len__()] = value
 
     def extend(self, arr):
         for element in arr:
@@ -107,16 +81,16 @@ class DynamicArray(StaticArray):
 
     def reallocate(self, size):
         # backup array
-        arr_copy = DynamicArray(self.size)
+        arr_copy = StaticArray(self.size)
         for element in self.data:
-            append_value(arr_copy, element)
+            arr_copy.append(element)
 
         # resize array
         self.resize(size)
 
         # copy to new array
         for element in arr_copy:
-            append_value(self, element)
+            self.append(element)
 
     def resize(self, size):
         """
