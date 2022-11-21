@@ -1,6 +1,6 @@
 import json
 import random
-
+import math
 from programming_assignment_2.assignment_syllabus.graph import Graph
 
 
@@ -85,32 +85,57 @@ def findSmallestWeightNeighbors(vertex, graph, hadView: list) -> tuple:
     return cachedEdge
 
 
-if __name__ == '__main__':
-    g = Graph()
-    g.addVertex('v1')
-    g.addVertex('v2')
-    g.addVertex('v3')
-    g.addVertex('v4')
-    g.addVertex('v5')
-    g.addVertex('v6')
-    g.addVertex('v7')
-
-    g.addUndirectedEdge('v1', 'v2', 2)
-    g.addUndirectedEdge('v1', 'v3', 4)
-    g.addUndirectedEdge('v1', 'v4', 1)
-    g.addUndirectedEdge('v3', 'v4', 2)
-    g.addUndirectedEdge('v2', 'v4', 3)
-    g.addUndirectedEdge('v3', 'v6', 5)
-    g.addUndirectedEdge('v6', 'v4', 8)
-    g.addUndirectedEdge('v2', 'v5', 10)
-    g.addUndirectedEdge('v5', 'v4', 7)
-    g.addUndirectedEdge('v5', 'v7', 6)
-    g.addUndirectedEdge('v7', 'v4', 4)
-    g.addUndirectedEdge('v6', 'v7', 1)
-
-print(findSmallestEdge(['v1'], g))
-
-
 def runPrim():
-    with open('data.json', 'r') as file:
-        data = json.load()
+    with open("data.json", "r") as file:
+        data = json.load(file)
+
+    # create a new graph
+    g = Graph()
+    # create vertex base on city (keys)
+    for element in list(data.keys()):
+        g.addVertex(element)
+
+    # generate the combination of 2 city coordination:
+    for K in g.V():  # loop for locationA
+        for V in g.V():  # base on locationA loop the locationB combined with locationA
+
+            if data[K] != data[V]:
+                # get coordinate for the position x and y
+                locationA = data[K]
+                locationB = data[V]
+
+                # get the distance between the 2 position
+                distance = pow(pow((locationA[0] - locationB[0]), 2) + pow((locationA[1] - locationB[1]), 2), 0.5)
+                # add edge between locationA and locationB
+                g.addUndirectedEdge(K, V, distance)
+    # calculate minimum spawning tree with edge
+    return prim(g)
+    print(prim(g))
+
+
+if __name__ == '__main__':
+    #     g = Graph()
+    #     g.addVertex('v1')
+    #     g.addVertex('v2')
+    #     g.addVertex('v3')
+    #     g.addVertex('v4')
+    #     g.addVertex('v5')
+    #     g.addVertex('v6')
+    #     g.addVertex('v7')
+    #
+    #     g.addUndirectedEdge('v1', 'v2', 2)
+    #     g.addUndirectedEdge('v1', 'v3', 4)
+    #     g.addUndirectedEdge('v1', 'v4', 1)
+    #     g.addUndirectedEdge('v3', 'v4', 2)
+    #     g.addUndirectedEdge('v2', 'v4', 3)
+    #     g.addUndirectedEdge('v3', 'v6', 5)
+    #     g.addUndirectedEdge('v6', 'v4', 8)
+    #     g.addUndirectedEdge('v2', 'v5', 10)
+    #     g.addUndirectedEdge('v5', 'v4', 7)
+    #     g.addUndirectedEdge('v5', 'v7', 6)
+    #     g.addUndirectedEdge('v7', 'v4', 4)
+    #     g.addUndirectedEdge('v6', 'v7', 1)
+    #
+    # print(findSmallestEdge(['v1'], g))
+
+    runPrim()
