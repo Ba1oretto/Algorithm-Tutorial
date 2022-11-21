@@ -33,7 +33,7 @@ class TestDijkstras(unittest.TestCase):
                  'd': {'a': 5, 'b': 9, 'c': 17, 'd': 0, 'e': 14, 'f': 6, 'g': 17},
                  'e': {'a': 14, 'b': 7, 'c': 5, 'd': 14, 'e': 0, 'f': 8, 'g': 9},
                  'f': {'a': 11, 'b': 15, 'c': 13, 'd': 6, 'e': 8, 'f': 0, 'g': 11},
-                 'g': {'a': 23, 'b': 16, 'c': 14, 'd': 17, 'e': 9, 'f': 11, 'g': 0}}
+                 'g': {'a': 22, 'b': 16, 'c': 14, 'd': 17, 'e': 9, 'f': 11, 'g': 0}}
         for k,c in answer.items():
             out = dijkstras(g,k)
             for v, cost in c.items():

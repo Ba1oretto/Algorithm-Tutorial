@@ -1,7 +1,7 @@
 import json
 import random
 import math
-from programming_assignment_2.assignment_syllabus.graph import Graph
+from graph import Graph
 
 
 def prim(graph):
