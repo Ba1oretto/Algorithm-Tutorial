@@ -110,7 +110,6 @@ def runPrim():
                 g.addUndirectedEdge(K, V, distance)
     # calculate minimum spawning tree with edge
     return prim(g)
-    print(prim(g))
 
 
 if __name__ == '__main__':
