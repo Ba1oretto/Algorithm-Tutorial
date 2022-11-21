@@ -46,8 +46,8 @@ class Graph:
         self.addEdge(B, A, weight)
 
     def removeEdge(self, src, dest):
-        for i, e in enumerate(self.edges):
-            if e[0] == src and e[1] == dest:
+        for i, (_, u, v, *_) in enumerate(self.edges):
+            if u == src and v == dest:
                 del self.edges[i]
                 break  # since we don't have parallel edge
         self.matrix[self.vertexTracker[src]][self.vertexTracker[dest]] = 0
@@ -60,7 +60,7 @@ class Graph:
         return self.indexMapper
 
     def E(self):
-        return list(e.getAsList() for e in self.edges)
+        return list(e for *_, e in self.edges)
 
     def neighbors(self, value):
         neighbor = list()
@@ -101,18 +101,45 @@ class Graph:
         return seen
 
     def isDirected(self):
-        pass
+        for _, u, v, *_ in self.edges:
+            if not self.matrix[self.vertexTracker[v]][self.vertexTracker[u]]:
+                return True
+        return False
 
     def isCyclic(self):
-        pass
+        for k, v in enumerate(self.vertexTracker):
+            stack = [k]
+            seen = [False for _ in range(self.length)]
+            first = True
+            prev = None
+            while stack:
+                top = stack.pop()
+                if not first and top == k:
+                    return True
+                else:
+                    first = False
+                if seen[self.vertexTracker[top]]:
+                    continue
+                seen[self.vertexTracker[top]] = True
+                update = False
+                for n in self.neighbors(top):
+                    if n == prev:
+                        continue
+                    stack.append(n)
+                    update = True
+                if self.isDirected():
+                    prev = top
+                elif update:
+                    prev = top
+            return False
 
     def isConnected(self):
         count = self.length
         root = list(i for i in range(self.length))
         rank = list(0 for _ in range(self.length))
-        for edge in self.edges:
-            x = self.find(root, edge[0])
-            y = self.find(root, edge[1])
+        for _, u, v, *_ in self.edges:
+            x = self.find(root, u)
+            y = self.find(root, v)
             if x == y:
                 continue
             if rank[x] > rank[y]:
@@ -126,17 +153,34 @@ class Graph:
         return count == 1
 
     def isTree(self):
-        stack = [self.indexMapper[0]]
-        seen = list()
+        length = round(len(self.edges) / 2)
+        if length != self.length - 1:
+            return False
 
-        while stack:
-            top = stack.pop()
-            if top in seen:
+        edgesCopy = []
+        for i, (e, *_) in enumerate(self.edges):
+            if not i & 1:
+                edgesCopy.append(e)
+
+        root = [i for i in range(length + 1)]
+        rank = [0 for _ in range(length + 1)]
+
+        for _, u, v, *_ in iter(edgesCopy):
+            x = self.find(root, self.vertexTracker[u])
+            y = self.find(root, self.vertexTracker[v])
+
+            if x == y:
                 return False
-            seen.append(top)
-            for n in self.neighbors(top):
-                stack.append(n)
-        return len(seen) == self.length
+
+            if rank[x] > rank[y]:
+                root[y] = x
+            elif rank[x] < rank[y]:
+                root[x] = y
+            else:
+                root[x] = y
+                rank[y] += 1
+
+        return True
 
     def __len__(self):
         return self.length
@@ -203,14 +247,18 @@ class Edge:
         self.v = v
         self.weight = weight
 
-    def __getitem__(self, item):
-        return self.u if item == 0 else self.v if item == 1 else self.weight
-
     def __contains__(self, item):
         return self.u == item or self.v == item
 
     def __repr__(self):
         return f"[{self.u}, {self.v}, {self.weight}]"
+
+    def __iter__(self):
+        yield self
+        yield self.u
+        yield self.v
+        yield self.weight
+        yield self.getAsList()
 
     def getAsList(self):
         return [self.u, self.v, self.weight]
